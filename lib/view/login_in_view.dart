@@ -1,11 +1,14 @@
+import 'package:cubit_task/Const/const_data.dart';
 import 'package:cubit_task/Controller/Cubits/UserLoginCubit/user_login_cubit.dart';
 import 'package:cubit_task/Controller/Cubits/UserLoginCubit/user_login_state.dart';
 import 'package:cubit_task/Models/DataController/user_controler.dart';
 import 'package:cubit_task/Utils/routes/routes_name.dart';
 import 'package:cubit_task/Utils/utils.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../Controller/Cubits/StringCubit/language_cubit.dart';
 import '../Controller/Cubits/UserRegisterCubit/user_register_cubit.dart';
 import '../Controller/Cubits/UserRegisterCubit/user_register_state.dart';
 
@@ -19,7 +22,39 @@ class LoginView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Login State'),
+        title: const Text('login_appbar_title').tr(),
+        actions: [
+          BlocBuilder<LanguageCubit, String>(
+            builder: (context, state) {
+              return DropdownButton(
+                  style: const TextStyle(color: Colors.white),
+                  underline: Container(),
+                  dropdownColor: Colors.blue,
+                  // dropdownColor: Colors.blue,
+                  icon: const Icon(Icons.language),
+                  iconEnabledColor: Colors.white,
+                  value: state,
+                  // focusColor: Colors.white,
+                  items: languageList.map((String lan) {
+                    return DropdownMenuItem(
+                      value: lan,
+                      child: Text(
+                        lan,
+                        style: const TextStyle(color: Colors.white),
+                      ),
+                    );
+                  }).toList(),
+                  onChanged: (String? lan) {
+                    if (lan == 'Eng') {
+                      context.setLocale(const Locale('en'));
+                    } else {
+                      context.setLocale(const Locale('ur'));
+                    }
+                    context.read<LanguageCubit>().chnageLanguage(lan!);
+                  });
+            },
+          )
+        ],
       ),
       body: Padding(
           padding: const EdgeInsets.all(8.0),
@@ -30,7 +65,7 @@ class LoginView extends StatelessWidget {
                 controller: _emailControler,
                 style: Theme.of(context).textTheme.bodyText1,
                 decoration: InputDecoration(
-                    labelText: 'Email',
+                    labelText: 'email'.tr(),
                     prefixIcon: const Icon(Icons.person),
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(
@@ -43,7 +78,7 @@ class LoginView extends StatelessWidget {
                 controller: _passControler,
                 style: Theme.of(context).textTheme.bodyText1,
                 decoration: InputDecoration(
-                  labelText: 'Password',
+                  labelText: 'password'.tr(),
                   prefixIcon: const Icon(Icons.lock),
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(
@@ -81,7 +116,7 @@ class LoginView extends StatelessWidget {
                       _emailControler.clear();
                       _passControler.clear();
                     } else {
-                      showSnackBar(context, 'enter email or password');
+                      showSnackBar(context, 'enter_email_password'.tr());
                     }
                   },
                   child: BlocConsumer<UserLoginCubit, UserLoginState>(
@@ -94,15 +129,15 @@ class LoginView extends StatelessWidget {
                             Navigator.pushNamed(context, RoutesName.userView);
                           }
                         } else {
-                          showSnackBar(context, 'no user registered');
+                          showSnackBar(context, 'no_user_registered'.tr());
                         }
                       }
                       if (loginState is UserLoginSocketException) {
-                        showSnackBar(context, 'No Internet');
+                        showSnackBar(context, 'no_internet'.tr());
                       }
 
                       if (loginState is UserLoginBadRequest) {
-                        showSnackBar(context, 'wrong password or email');
+                        showSnackBar(context, 'wrong_email_password'.tr());
                       }
                     },
                     builder: (context, loginState) {
@@ -115,8 +150,8 @@ class LoginView extends StatelessWidget {
                                     color: Colors.white,
                                     strokeWidth: 4.0,
                                   )
-                                : const Text('Login',
-                                    style: TextStyle(
+                                : Text('login'.tr(),
+                                    style: const TextStyle(
                                         fontSize: 14,
                                         fontWeight: FontWeight.w700)),
                           ));
@@ -143,19 +178,19 @@ class LoginView extends StatelessWidget {
                       _emailControler.clear();
                       _passControler.clear();
                     } else {
-                      showSnackBar(context, 'enter email or password');
+                      showSnackBar(context, 'enter_email_password'.tr());
                     }
                   },
                   child: BlocConsumer<UserRegisterCubit, UserRegisterState>(
                     listener: (context, registerState) {
                       if (registerState is UserRegisterLoaded) {
-                        showSnackBar(context, 'user added successfully');
+                        showSnackBar(context, 'user_added_successfully'.tr());
                       }
                       if (registerState is UserRegisterSocketException) {
-                        showSnackBar(context, 'No Internet');
+                        showSnackBar(context, 'no_internet'.tr());
                       }
                       if (registerState is UserLoginBadRequest) {
-                        showSnackBar(context, 'wrong password or email');
+                        showSnackBar(context, 'wrong_email_password'.tr());
                       }
                     },
                     builder: (context, registerState) {
@@ -168,8 +203,8 @@ class LoginView extends StatelessWidget {
                                     color: Colors.white,
                                     strokeWidth: 4.0,
                                   )
-                                : const Text('Register',
-                                    style: TextStyle(
+                                : Text('register'.tr(),
+                                    style: const TextStyle(
                                         fontSize: 14,
                                         fontWeight: FontWeight.w700)),
                           ));

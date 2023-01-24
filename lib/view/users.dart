@@ -1,5 +1,6 @@
 import 'package:cubit_task/Controller/Cubits/UserDataCubit/user_cubit.dart';
 import 'package:cubit_task/Models/DataController/user_controler.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -29,7 +30,7 @@ class _UsersViewState extends State<UsersView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Api with State')),
+      appBar: AppBar(title: const Text('api_cubit_state').tr()),
       body: BlocBuilder<UserCubit, UserState>(builder: (_, state) {
         if (state is UserCubitLoading) {
           return const Center(child: CircularProgressIndicator());
@@ -55,16 +56,16 @@ class _UsersViewState extends State<UsersView> {
               });
         }
         if (state is UserCubitInitial) {
-          return const Text('Initial state');
+          return const Text('initial_state').tr();
         }
         if (state is UserSocketException) {
-          return const Center(
-            child: Text('No Internet'),
+          return Center(
+            child: const Text('no_internet').tr(),
           );
         }
         if (state is TokenExpire) {
-          return const Center(
-            child: Text("Token expire"),
+          return Center(
+            child: const Text("token_expire").tr(),
           );
         }
         return Container();

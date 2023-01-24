@@ -1,3 +1,4 @@
+import 'package:cubit_task/Controller/Cubits/StringCubit/language_cubit.dart';
 import 'package:cubit_task/Controller/Cubits/UserRegisterCubit/user_register_cubit.dart';
 import 'package:cubit_task/Controller/Cubits/pageCubit/page_cubit.dart';
 import 'package:flutter/material.dart';
@@ -25,4 +26,5 @@ dynamic cubits = [
   BlocProvider(create: (_) => UserLoginCubit()),
   BlocProvider(create: (_) => UserRegisterCubit()),
   BlocProvider(create: (_) => PageCubit()),
+  BlocProvider(create: (_) => LanguageCubit())
 ];

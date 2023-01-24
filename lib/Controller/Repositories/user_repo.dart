@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 import 'package:cubit_task/Models/DataController/user_controler.dart';
-import 'package:cubit_task/Models/user_model.dart';
+import 'package:cubit_task/Models/User/user_model.dart';
 import 'package:cubit_task/Utils/status_code.dart';
 import 'package:http/http.dart' as http;
 

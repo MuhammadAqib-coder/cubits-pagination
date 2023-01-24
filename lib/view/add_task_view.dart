@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -14,7 +15,7 @@ class AddTaskView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('New Tasks'),
+        title: const Text('new_task').tr(),
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -23,7 +24,7 @@ class AddTaskView extends StatelessWidget {
               builder: (context, newListState) {
             return Expanded(
                 child: newListState.isEmpty
-                    ? const Center(child: Text('No Task Available'))
+                    ? Center(child: const Text('no_task_available').tr())
                     : ListView.builder(
                         shrinkWrap: true,
                         itemCount: newListState.length,
@@ -67,15 +68,17 @@ class AddTaskView extends StatelessWidget {
             children: [
               ElevatedButton(
                   onPressed: () {
-                    context.read<NewTaskListCubit>().addTask('New Task Added');
+                    context
+                        .read<NewTaskListCubit>()
+                        .addTask('new_task_added'.tr());
                     context.read<BoxCubit>().addBox(false);
                   },
-                  child: const Text('Add Task')),
+                  child: const Text('add_task').tr()),
               ElevatedButton(
                   onPressed: () {
                     Navigator.pushNamed(context, RoutesName.completeTask);
                   },
-                  child: const Text('Complete Task')),
+                  child: const Text('completed_task').tr()),
             ],
           )
         ],

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -13,7 +14,7 @@ class CompleteTaskView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Completed Task'),
+        title: const Text('completed_task').tr(),
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -22,7 +23,7 @@ class CompleteTaskView extends StatelessWidget {
               builder: (context, listState) {
             return Expanded(
                 child: listState.isEmpty
-                    ? const Center(child: Text('No Data'))
+                    ? Center(child: const Text('no_data').tr())
                     : ListView.builder(
                         shrinkWrap: true,
                         itemCount: listState.length,
@@ -46,7 +47,7 @@ class CompleteTaskView extends StatelessWidget {
                                               .removeTask(index);
                                           context
                                               .read<NewTaskListCubit>()
-                                              .addTask('New Task Added');
+                                              .addTask('new_task_added'.tr());
                                         }),
                                     title: Text(listState[index]),
                                     trailing: IconButton(

@@ -1,4 +1,4 @@
-import 'package:cubit_task/Models/user_model.dart';
+import 'package:cubit_task/Models/User/user_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
