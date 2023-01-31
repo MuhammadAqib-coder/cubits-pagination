@@ -8,7 +8,9 @@ class PageCubit extends Cubit<PageState> {
   PageCubit() : super(PageInitialState());
 
   getPosts(pageKey, postPerPage, controler) async {
-    emit(PageLoadingState());
+    if (pageKey == 0) {
+      emit(PageLoadingState());
+    }
     int response = await PostRepo.fetchPost(pageKey, postPerPage, controler);
     if (response == 200) {
       emit(PageLoadedState());

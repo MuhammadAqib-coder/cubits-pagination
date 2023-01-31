@@ -38,7 +38,7 @@ class MyApp extends StatelessWidget {
         //for simple cubit use ItemAddDelView() widget
         //for api integration with cubit state use LoginView() widget
         //for pagination with api use PostView() widget
-        home: LoginView(),
+        home: PostView(),
         onGenerateRoute: Routes.generateRoute,
       ),
     );

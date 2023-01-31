@@ -21,14 +21,14 @@ class PostRepo {
       if (response.statusCode == 200) {
         UserControler.postModel =
             postModelFromJson(await response.stream.bytesToString());
-        final isLastPage =
-            UserControler.postModel!.length < numberOfPostsPerRequest;
-        if (isLastPage) {
-          controler.appendLastPage(UserControler.postModel!);
-        } else {
-          final nextPageKey = pageKey + 1;
-          controler.appendPage(UserControler.postModel!, nextPageKey);
-        }
+        // final isLastPage =
+        //     UserControler.postModel!.length < numberOfPostsPerRequest;
+        // if (isLastPage) {
+        //   controler.appendLastPage(UserControler.postModel!);
+        // } else {
+        //   final nextPageKey = pageKey + 1;
+        //   controler.appendPage(UserControler.postModel!, nextPageKey);
+        // }
       }
       return response.statusCode;
     } on SocketException catch (e) {
